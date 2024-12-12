@@ -15,26 +15,24 @@ function getStatusColor(status) {
 }
 
 function displayStatusUpdates() {
-    const applications = ['realpage'];
+    const appId = 'realpage'; // Single application ID
 
-    applications.forEach(appId => {
-        getStatusUpdates(appId, (data) => {
-            if (data) {
-                // Get the display elements
-                const statusElement = document.getElementById(`${appId}-status-display`);
-                const textElement = document.getElementById(`${appId}-text-display`);
+    getStatusUpdates(appId, (data) => {
+        if (data) {
+            // Get the display elements
+            const statusElement = document.getElementById(`${appId}-status-display`);
+            const textElement = document.getElementById(`${appId}-text-display`);
 
-                // Update the text content
-                statusElement.textContent = data.status;
-                textElement.textContent = data.errormsg;
+            // Update the text content
+            statusElement.textContent = data.status;
+            textElement.textContent = data.errormsg;
 
-                // Apply the color to the status element
-                const color = getStatusColor(data.status);
-                statusElement.style.backgroundColor = color;
-            } else {
-                console.log(`No data available for ${appId}`);
-            }
-        });
+            // Apply the color to the status element
+            const color = getStatusColor(data.status);
+            statusElement.style.backgroundColor = color;
+        } else {
+            console.log(`No data available for ${appId}`);
+        }
     });
 }
 
